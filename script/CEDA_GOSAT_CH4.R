@@ -9,19 +9,18 @@ library(ncdf4)
 library(reshape2)
 library(tidyverse)
 getwd()
-setwd("C:/ProjetosR/CEDA/script") # Especifica o diretório e direciona
-flist <- list.files(path = "../dados1/") # Caminho de busca da pasta com arquivos .nc (.h5, etc)
+flist <- list.files(path = "dados1/") # Caminho de busca da pasta com arquivos .nc (.h5, etc)
 
 for(i in 1:length(flist)){ # Cria um laço ou seja vai percorrer a pasta e anexar todos os arquivos
   if(i == 1){
-    nc = nc_open(paste0("../dados1/", flist[i])) # depende do tipo de arquivo muda a forma de abrir
+    nc = nc_open(paste0("dados1/", flist[i])) # depende do tipo de arquivo muda a forma de abrir
     ch4 <- ncvar_get(nc, attributes(nc$var)$names[17]) # criar nova coluna com variavel metano
     date <- ncvar_get(nc, attributes(nc$var)$names[29]) # data da variável
     Lat <- ncvar_get(nc, attributes(nc$var)$names[11]) # geolocalização latitude
     Long <- ncvar_get(nc, attributes(nc$var)$names[4]) # geolocalização longitude
     dados<-data.frame(Lat,Long,ch4, as.POSIXlt.POSIXct(date)) # criar uma dataframe
   }else{    # as.POSIXlt.POSIXct super imporante para poder configurar a data.
-    nc = nc_open(paste0("../dados1/", flist[i]))
+    nc = nc_open(paste0("dados1/", flist[i]))
     ch4 <- ncvar_get(nc, attributes(nc$var)$names[17])
     date <- ncvar_get(nc, attributes(nc$var)$names[29])
     Lat <- ncvar_get(nc, attributes(nc$var)$names[11])

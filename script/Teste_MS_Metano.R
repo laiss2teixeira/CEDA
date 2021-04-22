@@ -6,8 +6,7 @@ library(trend)
 library(lubridate)
 library(gridExtra)
 
-setwd("C:/ProjetosR/CEDA/dados") # Especifica o diretório e direciona
-dados <- read.csv("dados_MS.csv")
+dados <- read.csv("dados/dados_MS.csv")
 head(dados)
 tail(dados)
 #shapiro.test(dados$ch4)  ### Error in shapiro.test(dados$ch4) : sample size must be between 3 and 5000
